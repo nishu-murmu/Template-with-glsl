@@ -7,7 +7,7 @@ import gsap from 'gsap'
 
 // Global Variables
 let scene, camera, renderer, clock, gui, stats, controls
-let canvas, sizes, elapsedTime, loader_text
+let canvas, sizes, elapsedTime,
 let geometry, material, cube
 let pointLight, ambientLight
 
@@ -22,9 +22,6 @@ sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
-const tl = gsap.timeline()
-tl.delay(1)
-tl.to(loader_text, {autoAlpha: 0, translateY: -50, duration: 1})
 
 function createScene() {
     scene = new THREE.Scene()
