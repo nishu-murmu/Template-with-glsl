@@ -3,15 +3,17 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import Stats from 'three/examples/jsm/libs/stats.module'
+import gsap from 'gsap'
 
 // Global Variables
 let scene, camera, renderer, clock, gui, stats, controls
-let canvas, sizes, elapsedTime
+let canvas, sizes, elapsedTime, loader_text
 let geometry, material, cube
 let pointLight, ambientLight
 
-
+// initializing the third party libraries
 canvas = document.querySelector('.canvas')
+loader_text = document.querySelector('.loader-text')
 clock = new THREE.Clock()
 gui = new GUI({ width: 400 })
 stats = new Stats()
@@ -20,6 +22,9 @@ sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
+const tl = gsap.timeline()
+tl.delay(1)
+tl.to(loader_text, {autoAlpha: 0, translateY: -50, duration: 1})
 
 function createScene() {
     scene = new THREE.Scene()

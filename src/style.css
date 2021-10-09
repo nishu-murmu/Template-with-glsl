@@ -1,19 +1,34 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
-html,
-body
-{
-    overflow: hidden;
+@font-face {
+    font-family: font1;
+    src: url(/static/fonts/Dead-Revolution.ttf);
+}
+@font-face {
+    font-family: font2;
+    src: url(/static/fonts/LeMans.ttf);
 }
 
-.webgl
-{
+html, body {
+    overflow: hidden;
+    color: white;
+}
+
+.webgl {
     position: fixed;
     top: 0;
     left: 0;
     outline: none;
+}
+
+.loader-text {
+    position: absolute;
+    top: 40%;
+    left: 28%;
+    font-size: 100px;
+    font-family: font2;
+    letter-spacing: 20px;
 }
