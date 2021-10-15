@@ -46,6 +46,8 @@ function createObjects() {
         vertexShader: vShader,
         fragmentShader: fShader,
         uniforms: {
+            time: {type: 'f', value: 0},
+            resolution: { type: 'v4', value: new THREE.Vector4()}
         }
     })
     plane = new THREE.Mesh(geometry, material)
