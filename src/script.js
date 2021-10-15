@@ -3,17 +3,18 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import Stats from 'three/examples/jsm/libs/stats.module'
+import vShader from '/src/shaders/vertex.glsl'
+import fShader from '/src/shaders/fragment.glsl'
 import gsap from 'gsap'
 
 // Global Variables
 let scene, camera, renderer, clock, gui, stats, controls
-let canvas, sizes, elapsedTime,
-let geometry, material, cube
+let canvas, sizes, elapsedTime
+let geometry, material, plane
 let pointLight, ambientLight
 
 // initializing the third party libraries
 canvas = document.querySelector('.canvas')
-loader_text = document.querySelector('.loader-text')
 clock = new THREE.Clock()
 gui = new GUI({ width: 400 })
 stats = new Stats()
@@ -39,10 +40,16 @@ function createScene() {
 }
 
 function createObjects() {
-    geometry = new THREE.BoxGeometry(1, 1, 1)
-    material = new THREE.MeshStandardMaterial({ color: 0xff0000 })
-    cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
+    geometry = new THREE.PlaneBufferGeometry(5, 5, 50, 50)
+    material = new THREE.ShaderMaterial({
+        side: THREE.DoubleSide,
+        vertexShader: vShader,
+        fragmentShader: fShader,
+        uniforms: {
+        }
+    })
+    plane = new THREE.Mesh(geometry, material)
+    scene.add(plane)
 }
 
 function createLights() {
@@ -60,8 +67,6 @@ function animate() {
     // Update controls
     controls.update()
     stats.update()
-    cube.rotation.y = elapsedTime
-    cube.rotation.x = elapsedTime
     // Render
     renderer.render(scene, camera)
     // Call tick again on the next frame
